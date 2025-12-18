@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import tag6 from "../../../public/images/tag6.svg";
 // arrow3 was imported but not used in your snippet, keeping it just in case
-import arrow3 from "../../../public/images/arrow3.svg";
+// import arrow3 from "../../../public/images/arrow3.svg";
 
 const KontaktForm = () => {
   return (

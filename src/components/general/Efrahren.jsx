@@ -2,14 +2,14 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
-const FloatingImage = ({ id, x, y, src, onComplete }) => {
+const FloatingImage = ({ id, x, y, src, duration, onComplete }) => {
   return (
     <div
       className="absolute w-22 h-22 md:w-32 md:h-32 z-20 animate-pop-fade pointer-events-none opacity-70"
       style={{
         top: `${y}%`,
         left: `${x}%`,
-        animationDuration: `${2 + Math.random() * 3}s`,
+        animationDuration: `${duration}s`,
       }}
       onAnimationEnd={() => onComplete(id)}
     >
@@ -50,6 +50,7 @@ const Efrahren = ({ content }) => {
         x: Math.random() * 80 + 10,
         y: Math.random() * 80 + 10,
         src: randomImg,
+        duration: 2 + Math.random() * 3, // Calculate duration here
       };
 
       setFloatingImages((prev) => [...prev, newImage]);
@@ -85,6 +86,7 @@ const Efrahren = ({ content }) => {
             x={img.x}
             y={img.y}
             src={img.src}
+            duration={img.duration}
             onComplete={handleAnimationComplete}
           />
         ))}

@@ -46,8 +46,8 @@ const Einzigartig = () => {
                 John Davison Rockefeller
               </h1>
               <p className="text-[#5C7A84] text-[14px] sm:text-[16px]">
-                „Es ist besser, einen Tag im Monat über sein Geld nachzudenken,
-                als einen ganzen Monat dafür zu arbeiten."
+                &ldquo;Es ist besser, einen Tag im Monat über sein Geld
+                nachzudenken, als einen ganzen Monat dafür zu arbeiten.&rdquo;
               </p>
             </div>
             <div className="absolute bottom-0 right-0 opacity-50 sm:opacity-100">

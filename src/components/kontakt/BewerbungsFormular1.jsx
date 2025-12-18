@@ -5,6 +5,62 @@ import incon from "../../../public/images/incon.svg";
 import Image from "next/image";
 import upload from "../../../public/images/upload.svg";
 
+// ✅ Define FileUploadArea OUTSIDE the main component
+const FileUploadArea = ({
+  type,
+  label,
+  dragActive,
+  files,
+  fileInputRefs,
+  handleDrag,
+  handleDrop,
+  handleFileChange,
+}) => (
+  <div className="mb-6">
+    <label className="block text-sm font-light text-gray-600 mb-2">
+      {label}
+    </label>
+    <div
+      className={`border-2 border-dashed rounded-lg p-30 text-center transition-colors ${
+        dragActive[type]
+          ? "border-blue-500 bg-blue-50"
+          : "border-gray-300 bg-white"
+      }`}
+      onDragEnter={(e) => handleDrag(e, type, true)}
+      onDragLeave={(e) => handleDrag(e, type, false)}
+      onDragOver={(e) => handleDrag(e, type, true)}
+      onDrop={(e) => handleDrop(e, type)}
+    >
+      <div className="mb-4 items-center justify-center flex">
+        <Image src={upload} alt="Upload Icon" />
+      </div>
+      <p className="text-gray-700 mb-1">
+        Wählen Sie eine Datei aus oder ziehen Sie sie per Drag & Drop hierher.
+      </p>
+      <p className="text-gray-400 text-sm mb-4">
+        JPEG, PNG, PDG-Formate, bis zu 50 MB
+      </p>
+      {files[type] && (
+        <p className="text-green-600 text-sm mb-3">✓ {files[type]?.name}</p>
+      )}
+      <input
+        ref={fileInputRefs[type]}
+        type="file"
+        className="hidden"
+        accept=".jpg,.jpeg,.png,.pdf,.mp4"
+        onChange={(e) => handleFileChange(e, type)}
+      />
+      <button
+        type="button"
+        onClick={() => fileInputRefs[type].current?.click()}
+        className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors text-sm"
+      >
+        Hochladen
+      </button>
+    </div>
+  </div>
+);
+
 export default function BewerbungsFormular1() {
   const [formData, setFormData] = useState({
     vorname: "",
@@ -25,7 +81,6 @@ export default function BewerbungsFormular1() {
     andereDateien: false,
   });
 
-  // ✅ FIXED: Call useRef at the top level, not inside object
   const lebenslaufRef = useRef(null);
   const motivationsschreibenRef = useRef(null);
   const andereDateienRef = useRef(null);
@@ -36,7 +91,6 @@ export default function BewerbungsFormular1() {
     andereDateien: andereDateienRef,
   };
 
-  // ... rest of your code stays the same
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -117,52 +171,6 @@ export default function BewerbungsFormular1() {
     alert("Bewerbung erfolgreich eingereicht!");
   };
 
-  const FileUploadArea = ({ type, label }) => (
-    <div className="mb-6">
-      <label className="block text-sm font-light text-gray-600 mb-2">
-        {label}
-      </label>
-      <div
-        className={`border-2 border-dashed rounded-lg p-30 text-center transition-colors ${
-          dragActive[type]
-            ? "border-blue-500 bg-blue-50"
-            : "border-gray-300 bg-white"
-        }`}
-        onDragEnter={(e) => handleDrag(e, type, true)}
-        onDragLeave={(e) => handleDrag(e, type, false)}
-        onDragOver={(e) => handleDrag(e, type, true)}
-        onDrop={(e) => handleDrop(e, type)}
-      >
-        <div className="mb-4 items-center justify-center flex">
-          <Image src={upload} alt="Upload Icon" />
-        </div>
-        <p className="text-gray-700 mb-1">
-          Wählen Sie eine Datei aus oder ziehen Sie sie per Drag & Drop hierher.
-        </p>
-        <p className="text-gray-400 text-sm mb-4">
-          JPEG, PNG, PDG-Formate, bis zu 50 MB
-        </p>
-        {files[type] && (
-          <p className="text-green-600 text-sm mb-3">✓ {files[type]?.name}</p>
-        )}
-        <input
-          ref={fileInputRefs[type]}
-          type="file"
-          className="hidden"
-          accept=".jpg,.jpeg,.png,.pdf,.mp4"
-          onChange={(e) => handleFileChange(e, type)}
-        />
-        <button
-          type="button"
-          onClick={() => fileInputRefs[type].current?.click()}
-          className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors text-sm"
-        >
-          Hochladen
-        </button>
-      </div>
-    </div>
-  );
-
   return (
     <div className="max-w-5xl mx-auto py-12 px-5 md:px-0">
       <h2 className="text-[24px] md:text-[32px] text-[#011222]">
@@ -241,14 +249,35 @@ export default function BewerbungsFormular1() {
           </div>
         </div>
 
-        <FileUploadArea type="lebenslauf" label="Hochladen: Lebenslauf" />
+        <FileUploadArea
+          type="lebenslauf"
+          label="Hochladen: Lebenslauf"
+          dragActive={dragActive}
+          files={files}
+          fileInputRefs={fileInputRefs}
+          handleDrag={handleDrag}
+          handleDrop={handleDrop}
+          handleFileChange={handleFileChange}
+        />
         <FileUploadArea
           type="motivationsschreiben"
           label="Hochladen: Motivationsschreiben"
+          dragActive={dragActive}
+          files={files}
+          fileInputRefs={fileInputRefs}
+          handleDrag={handleDrag}
+          handleDrop={handleDrop}
+          handleFileChange={handleFileChange}
         />
         <FileUploadArea
           type="andereDateien"
           label="Hochladen: Andere Dateien (Zertifikate, Arbeitszeugnisse Usw.)"
+          dragActive={dragActive}
+          files={files}
+          fileInputRefs={fileInputRefs}
+          handleDrag={handleDrag}
+          handleDrop={handleDrop}
+          handleFileChange={handleFileChange}
         />
 
         <button className="flex flex-row items-center justify-start gap-3 bg-[#0069D1] px-5 py-3 rounded-full mt-10">

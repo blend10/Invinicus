@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import logo from "../../../public/images/logo.svg";
-import logo1 from "../../../public/images/logo10.svg";
+// import logo from "../../../public/images/logo.svg";
+// import logo1 from "../../../public/images/logo10.svg";
 import ig from "../../../public/images/ig.svg";
 import tiktok from "../../../public/images/tiktok.svg";
 import linkedin from "../../../public/images/linkedin.svg";
-import footerBg from "../../../public/images/footerBg.png";
+// import footerBg from "../../../public/images/footerBg.png";
 import tel from "../../../public/images/tel.svg";
 import mail from "../../../public/images/mail.svg";
 import home from "../../../public/images/home.svg";

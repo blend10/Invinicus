@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import arrow from "../../../public/images/arrow.svg";
+import image1 from "../../../public/images/client1.png";
+import image2 from "../../../public/images/client2.png";
+import image3 from "../../../public/images/client3.png";
 
 export default function TestimonialSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,7 +17,7 @@ export default function TestimonialSection() {
       text: "Ich fühlte mich vom ersten Gespräch an verstanden. Keine Standardlösung, sondern eine Versicherung, die wirklich zu meinem Leben passt.",
       name: "Laura Meier",
       role: "CEO at Miro",
-      image: "/images/client1.png",
+      image: image1,
       bgColor: "bg-[#effbfe]",
     },
     {
@@ -24,7 +27,7 @@ export default function TestimonialSection() {
       text: "Mein Anliegen wurde sofort bearbeitet – ohne Papierkram, ohne Stress. Ich wusste jederzeit, woran ich bin.",
       name: "Sarah Baumann",
       role: "Founder at Zira",
-      image: "/images/client2.png",
+      image: image2,
       bgColor: "bg-[#fdf5fc]",
     },
     {
@@ -34,7 +37,7 @@ export default function TestimonialSection() {
       text: "Nach einem Schadenfall wurde ich kompetent und freundlich begleitet. So stelle ich mir moderne Versicherung vor.",
       name: "John Lee",
       role: "CEO at Zoho",
-      image: "/images/client3.png",
+      image: image3,
       bgColor: "bg-[#fffaf5]",
     },
     // {
@@ -145,7 +148,7 @@ export default function TestimonialSection() {
               </p>
 
               <div className="flex items-center gap-4 mt-auto">
-                <img
+                <Image
                   src={item.image}
                   alt={item.name}
                   className="w-12 h-12 rounded-full object-cover bg-gray-200"
